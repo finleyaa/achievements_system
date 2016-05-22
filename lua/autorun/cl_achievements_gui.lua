@@ -25,11 +25,7 @@ if CLIENT then
 			surface.SetDrawColor( 2, 134, 242, 240 )
 			surface.DrawRect( 1, 1, main:GetWide() - 2, main:GetTall() - 2 )
 			surface.SetFont( "bold" )
-<<<<<<< HEAD
-			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 6 ) 
-=======
-			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 3 ) 
->>>>>>> origin/master
+			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 6 )
 			surface.SetTextColor( 255, 255, 255, 255 )
 			surface.DrawText( "Achievements" )
 		end
@@ -45,12 +41,8 @@ if CLIENT then
 				return 
 			end
 			surface.SetDrawColor( colorv )
-			surface.DrawRect( 1, 1, close:GetWide() - 2, close:GetTall() - 2 )	
-<<<<<<< HEAD
+			surface.DrawRect( 1, 1, close:GetWide() - 2, close:GetTall() - 2 )
 			surface.SetFont( "bold_x" )
-=======
-			surface.SetFont( "bold" )
->>>>>>> origin/master
 			surface.SetTextColor( 255, 255, 255, 255 )
 			surface.SetTextPos( 17, 0.5 ) 
 			surface.DrawText( "x" )
