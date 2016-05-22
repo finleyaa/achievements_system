@@ -23,7 +23,7 @@ if CLIENT then
 			surface.DrawOutlinedRect( 0, 0, main:GetWide(), main:GetTall() )
 			surface.SetDrawColor( 2, 134, 242, 240 )
 			surface.DrawRect( 1, 1, main:GetWide() - 2, main:GetTall() - 2 )
-			surface.SetFont( "sc3_menufont" )
+			surface.SetFont( "bold" )
 			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 3 ) 
 			surface.SetTextColor( 255, 255, 255, 255 )
 			surface.DrawText( "Achievements" )
@@ -41,7 +41,7 @@ if CLIENT then
 			end
 			surface.SetDrawColor( colorv )
 			surface.DrawRect( 1, 1, close:GetWide() - 2, close:GetTall() - 2 )	
-			surface.SetFont( "sc3_font1" )
+			surface.SetFont( "bold" )
 			surface.SetTextColor( 255, 255, 255, 255 )
 			surface.SetTextPos( 16, 3 ) 
 			surface.DrawText( "x" )
