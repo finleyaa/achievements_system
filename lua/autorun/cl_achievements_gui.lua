@@ -1,5 +1,6 @@
 if CLIENT then
 	surface.CreateFont("bold", {font = "Trebuchet18" , size = 15, weight = 600, color = Color(0,0,0,255)})
+	surface.CreateFont("bold_x", {font = "Trebuchet18" , size = 18, weight = 600, color = Color(0,0,0,255)})
 	surface.CreateFont("normal", {font = "Trebuchet18", color = Color(0,0,0,255)})
 
 	function OpenAchievementGUI()
@@ -23,8 +24,8 @@ if CLIENT then
 			surface.DrawOutlinedRect( 0, 0, main:GetWide(), main:GetTall() )
 			surface.SetDrawColor( 2, 134, 242, 240 )
 			surface.DrawRect( 1, 1, main:GetWide() - 2, main:GetTall() - 2 )
-			surface.SetFont( "sc3_menufont" )
-			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 3 ) 
+			surface.SetFont( "bold" )
+			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 6 ) 
 			surface.SetTextColor( 255, 255, 255, 255 )
 			surface.DrawText( "Achievements" )
 		end
@@ -41,9 +42,9 @@ if CLIENT then
 			end
 			surface.SetDrawColor( colorv )
 			surface.DrawRect( 1, 1, close:GetWide() - 2, close:GetTall() - 2 )	
-			surface.SetFont( "sc3_font1" )
+			surface.SetFont( "bold_x" )
 			surface.SetTextColor( 255, 255, 255, 255 )
-			surface.SetTextPos( 16, 3 ) 
+			surface.SetTextPos( 17, 0.5 ) 
 			surface.DrawText( "x" )
 			return true
 		end
