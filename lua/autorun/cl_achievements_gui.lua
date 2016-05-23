@@ -1,5 +1,6 @@
 if CLIENT then
-	surface.CreateFont("bold", {font = "Trebuchet18" , size = 15, weight = 600, color = Color(0,0,0,255)})
+	surface.CreateFont("bold", {font = "LemonMilk" , size = 19, weight = 500, color = Color(0,0,0,255)}) --http://www.dafont.com/marsneveneksk.d4012 - font creator
+	surface.CreateFont("bold_x", {font = "Trebuchet18" , size = 18, weight = 600, color = Color(0,0,0,255)})
 	surface.CreateFont("normal", {font = "Trebuchet18", color = Color(0,0,0,255)})
 
 	function OpenAchievementGUI()
@@ -9,12 +10,12 @@ if CLIENT then
 		end
 				
 		main = vgui.Create( "DFrame" )
-		main:SetSize( 300, 400 )
+		main:SetSize( 1024, 400 )
 		main:SetTitle( "" )
 		main:SetVisible( true )
 		main:ShowCloseButton( true )
 		main:MakePopup()
-		main:Center()	
+		main:Center()
 		main.btnMaxim:Hide()
 		main.btnMinim:Hide() 
 		main.btnClose:Hide()
@@ -23,8 +24,8 @@ if CLIENT then
 			surface.DrawOutlinedRect( 0, 0, main:GetWide(), main:GetTall() )
 			surface.SetDrawColor( 2, 134, 242, 240 )
 			surface.DrawRect( 1, 1, main:GetWide() - 2, main:GetTall() - 2 )
-			surface.SetFont( "sc3_menufont" )
-			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 3 ) 
+			surface.SetFont( "bold" )
+			surface.SetTextPos( main:GetWide() / 2 - surface.GetTextSize( "Achievements" ) / 2, 6 ) 
 			surface.SetTextColor( 255, 255, 255, 255 )
 			surface.DrawText( "Achievements" )
 		end
@@ -41,9 +42,9 @@ if CLIENT then
 			end
 			surface.SetDrawColor( colorv )
 			surface.DrawRect( 1, 1, close:GetWide() - 2, close:GetTall() - 2 )	
-			surface.SetFont( "sc3_font1" )
+			surface.SetFont( "bold_x" )
 			surface.SetTextColor( 255, 255, 255, 255 )
-			surface.SetTextPos( 16, 3 ) 
+			surface.SetTextPos( 17, 0.5 ) 
 			surface.DrawText( "x" )
 			return true
 		end
@@ -87,35 +88,97 @@ if CLIENT then
 			surface.DrawRect( 1, 1, inside:GetWide() - 2, inside:GetTall() - 2 )
 		end
 		
-		local scroll = vgui.Create("DScrollPanel", inside);
-		scroll:Dock(FILL);
-		scroll:DockMargin(1, 1, 1, 1);
+		local panel_left = vgui.Create("DPanel", inside)
+		panel_left:SetPos(5,5)
+		panel_left:SetSize(615, 355)
+		panel_left:SetBackgroundColor(Color(255,255,255))
 		
-		local x, y = 10, 10
+		local panel_right = vgui.Create("DPanel", inside)
+		panel_right:SetPos(625,5)
+		panel_right:SetSize(380, 355)
+		panel_right:SetBackgroundColor(Color(255,255,255))
+		
+		local achievement_name = vgui.Create("DLabel", panel_right)
+		achievement_name:SetPos(5,5)
+		achievement_name:SetText("")
+		
+		local achievement_desc = vgui.Create("DLabel", panel_right)
+		achievement_desc:SetPos(5,30)
+		achievement_desc:SetText("")
+		
+		local locked_lbl = vgui.Create("DLabel", panel_left)
+		surface.SetFont("bold")
+		local locked_size = surface.GetTextSize("Locked")
+		locked_lbl:SetPos(150 - (locked_size / 2), 10)
+		locked_lbl:SetFont("bold")
+		locked_lbl:SetTextColor(Color(0,0,0))
+		locked_lbl:SetText("Locked")
+		locked_lbl:SizeToContents()
+		
+		local unlocked_lbl = vgui.Create("DLabel", panel_left)
+		surface.SetFont("bold")
+		local unlocked_size = surface.GetTextSize("Unlocked")
+		unlocked_lbl:SetPos(460 - (unlocked_size / 2), 10)
+		unlocked_lbl:SetFont("bold")
+		unlocked_lbl:SetTextColor(Color(0,0,0))
+		unlocked_lbl:SetText("Unlocked")
+		unlocked_lbl:SizeToContents()
+		
+		local scroll = vgui.Create("DScrollPanel", panel_left);
+		scroll:SetPos(5,35)
+		scroll:SetSize(605,315)
+		
+		local achievement_lock_list = vgui.Create("DListView", scroll)
+		achievement_lock_list:SetMultiSelect(false)
+		achievement_lock_list:AddColumn("Achievement Name")
+		achievement_lock_list:SetSize(300,315)
+		
+		local achievement_unlock_list = vgui.Create("DListView", scroll)
+		achievement_unlock_list:SetMultiSelect(false)
+		achievement_unlock_list:AddColumn("Achievement Name")
+		achievement_unlock_list:SetSize(300,315)
+		achievement_unlock_list:SetPos(305,0)
+		
+		achievement_lock_list.OnRowSelected = function(panel, line)
+		
+			for _,achievement in pairs(Achievements.List) do
+				if achievement_lock_list:GetLine(line):GetValue(1) == achievement.displayname then
+					achievement_name:SetFont("bold")
+					achievement_name:SetTextColor(Color(0,0,0))
+					achievement_name:SetText(achievement.displayname)
+					achievement_name:SizeToContents()
+					achievement_desc:SetFont("normal")
+					achievement_desc:SetTextColor(Color(0,0,0))
+					achievement_desc:SetText(achievement.description)
+					achievement_desc:SizeToContents()
+				end
+			end
+		
+		end
+		
+		achievement_unlock_list.OnRowSelected = function(panel, line)
+		
+			for _,achievement in pairs(Achievements.List) do
+				if achievement_unlock_list:GetLine(line):GetValue(1) == achievement.displayname then
+					achievement_name:SetFont("bold")
+					achievement_name:SetTextColor(Color(0,0,0))
+					achievement_name:SetText(achievement.displayname)
+					achievement_name:SizeToContents()
+					achievement_desc:SetFont("normal")
+					achievement_desc:SetTextColor(Color(0,0,0))
+					achievement_desc:SetText(achievement.description)
+					achievement_desc:SizeToContents()
+				end
+			end
+		
+		end
 		
 		for _,achievement in pairs(Achievements.List) do
-			local achievement_label_part1 = vgui.Create("DLabel", scroll)
-			local achievement_label_part2 = vgui.Create("DLabel", scroll)
 			if table.HasValue(Achievements.Completed, achievement.name) then
-				achievement_label_part1:SetFont("bold")
-				achievement_label_part1:SetText(achievement.displayname)
-				achievement_label_part2:SetFont("normal")
-				achievement_label_part2:SetText(achievement.description .. "\nUnlocked!")
-				achievement_label_part1:SetTextColor(Color(0,0,0,255))
-				achievement_label_part2:SetTextColor(Color(0,0,0,255))
+				achievement_unlock_list:AddLine(achievement.displayname)
 			else
-				achievement_label_part1:SetFont("bold")
-				achievement_label_part1:SetText(achievement.displayname)
-				achievement_label_part2:SetFont("normal")
-				achievement_label_part2:SetText(achievement.description .. "\nLocked!")
-				achievement_label_part1:SetTextColor(Color(255,0,0,255))
-				achievement_label_part2:SetTextColor(Color(255,0,0,255))
+				achievement_lock_list:AddLine(achievement.displayname)
 			end
-			achievement_label_part1:SizeToContents()
-			achievement_label_part1:SetPos(x, y)
-			achievement_label_part2:SizeToContents()
-			achievement_label_part2:SetPos(x, y+13)
-			y = y + 45
 		end
 		
 	end
