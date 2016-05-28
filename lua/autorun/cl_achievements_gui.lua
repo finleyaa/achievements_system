@@ -126,7 +126,7 @@ if CLIENT then
 		
 		achievement_unlock_list.OnRowSelected = achievement_lock_list.OnRowSelected
 		
-		main.PerformLayout = function( self )
+		main.PerformLayout = function( self ) -- needed to set stuff to the correct size
 		
 			close:SetPos( self:GetWide() - 50, 0 )
 			close:SetSize( 44, 22 )
