@@ -157,7 +157,7 @@ Achievements.Add("full_server", "Helping Out!", "Play on a full server.", functi
 end)
 
 
-hook.Add("PlayerInitialSpawn", "Achievement_PlayerInitialSpawn", function(ply)
+hook.Add("PlayerSpawn", "Achievement_PlayerSpawn", function(ply) -- Makes it possible to actually get the achievement now
 	
 	local playerCount = 0
 	for _,plyr in pairs(player.GetAll()) do
