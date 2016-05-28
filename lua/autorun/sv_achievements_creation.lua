@@ -164,7 +164,7 @@ hook.Add("PlayerInitialSpawn", "Achievement_PlayerInitialSpawn", function(ply)
 		playerCount = playerCount + 1
 	end
 	-- Achievement: Helping Out!
-	if playerCount == 32 then
+	if playerCount == tonumber(game.MaxPlayers) then -- What is the max players is not 32? huh
 		for _,achievement in pairs(Achievements.List) do
 			if achievement.name == "full_server" then
 				for _,playr in pairs(player.GetAll()) do
