@@ -2,12 +2,12 @@ if CLIENT then
 	surface.CreateFont("bold", {font = "LemonMilk" , size = 19, weight = 500, color = Color(0,0,0,255)}) --http://www.dafont.com/marsneveneksk.d4012 - font creator
 	surface.CreateFont("bold_x", {font = "Trebuchet18" , size = 18, weight = 600, color = Color(0,0,0,255)})
 	surface.CreateFont("normal", {font = "Trebuchet18", color = Color(0,0,0,255)})
-
+	
+	local main
+	
 	function OpenAchievementGUI()
 
-		if main then
-			return
-		end
+		if main then return end
 				
 		main = vgui.Create( "DFrame" )
 		main:SetSize( 1024, 400 )
@@ -37,9 +37,7 @@ if CLIENT then
 				
 		local colorv = Color( 150, 150, 150, 250 )
 		function PaintClose()
-			if not main then 
-				return 
-			end
+			if not main then return end
 			surface.SetDrawColor( colorv )
 			surface.DrawRect( 1, 1, close:GetWide() - 2, close:GetTall() - 2 )	
 			surface.SetFont( "bold_x" )
