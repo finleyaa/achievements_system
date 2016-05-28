@@ -157,14 +157,14 @@ Achievements.Add("full_server", "Helping Out!", "Play on a full server.", functi
 end)
 
 
-hook.Add("PlayerInitialSpawn", "Achievement_PlayerInitialSpawn", function(ply)
+hook.Add("PlayerSpawn", "Achievement_PlayerSpawn", function(ply) -- Makes it possible to actually get the achievement now
 	
 	local playerCount = 0
 	for _,plyr in pairs(player.GetAll()) do
 		playerCount = playerCount + 1
 	end
 	-- Achievement: Helping Out!
-	if playerCount == 32 then
+	if playerCount == tonumber(game.MaxPlayers) then -- What is the max players is not 32? huh
 		for _,achievement in pairs(Achievements.List) do
 			if achievement.name == "full_server" then
 				for _,playr in pairs(player.GetAll()) do
